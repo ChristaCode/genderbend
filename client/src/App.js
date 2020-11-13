@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
-import logo from './logo.svg';
-
+import Loader from 'react-loader-spinner';
+import female from './female.png';
+import male from './male.png';
 import './App.css';
 
 class App extends Component {
@@ -9,6 +9,8 @@ class App extends Component {
     response: '',
     post: '',
     responseToPost: '',
+    selectedFile: null,
+    parsing: false
   };
   
   componentDidMount() {
@@ -38,37 +40,54 @@ class App extends Component {
     
     this.setState({ responseToPost: body });
   };
-  
+
+  onChangeHandler=event=>{
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    })
+  }
+
+  onClickHandler = async e => {
+    e.preventDefault();
+    this.setState({ parsing: true });
+    const data = new FormData() 
+    console.log(this.state.selectedFile);
+    data.append('file', this.state.selectedFile)
+    const response = await fetch('/api/world', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ post: this.state.selectedFile }),
+    });
+    const body = await response.text();
+    
+    this.setState({ responseToPost: body });
+  }
+
 render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        <span>
+        <img src={male} alt="male" style={{width: 30, height: 30}} />
+        <span style={{padding: 5}}>GenderBend</span>
+        <img src={female} alt="female" style={{width: 20, height: 20}} />
+        </span>
         </header>
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p>
+        <br />
+        <div>
+          <input type="file" name="file" onChange={this.onChangeHandler}/>
+          <button type="button" onClick={this.onClickHandler}>Convert</button>
+          {this.state.parsing &&
+            <Loader
+              type="ThreeDots"
+              color="#00BFFF"
+              height={100}
+              width={100}
+            />}
+        </div>
       </div>
     );
   }
