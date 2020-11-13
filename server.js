@@ -24,11 +24,6 @@ filename: function (req, file, cb) {
 
 var upload = multer({ storage: storage }).single('file')
 
-// API calls
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
-
 app.post('/api/upload', async (req, res) => {
   upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {

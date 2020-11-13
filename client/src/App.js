@@ -11,20 +11,6 @@ class App extends Component {
     parsing: false
   };
   
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
-  }
-  
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    
-    return body;
-  };
-  
   handleSubmit = async e => {
     e.preventDefault();
     const response = await fetch('/api/world', {
@@ -41,8 +27,7 @@ class App extends Component {
 
   onChangeHandler=event=>{
     this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0,
+      selectedFile: event.target.files[0]
     })
   }
 
@@ -58,7 +43,12 @@ class App extends Component {
     })
     .catch(function (error) {
       console.log(error);
-    });
+    })
+    .then(() => this.setState({ parsing: false }))
+  }
+
+  onDownloadClickHandler = () => {
+    console.log('download');
   }
 
 render() {
@@ -83,6 +73,10 @@ render() {
               width={100}
             />}
         </div>
+        <br />
+        {!this.state.parsing && 
+          <button type="button" onClick={this.onDownloadClickHandler}>Download</button>
+        }
       </div>
     );
   }
