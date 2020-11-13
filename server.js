@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const textract = require('textract');
+const replace = require('replace-in-file');
 const app = express();
 const port = process.env.PORT || 5000;
 var multer = require('multer')
@@ -14,10 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-  cb(null, 'public')
+  cb(null, '')
 },
 filename: function (req, file, cb) {
-  cb(null, Date.now() + '-' +file.originalname )
+  cb(null, 'input.txt' )
 }
 })
 
@@ -28,21 +29,30 @@ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
 
-app.post('/api/world', (req, res) => {
-
-  console.log(req.body);
-  // res.send(
-  //   `I received your POST request. This is what you sent me: ${req.body.post}`,
-  // );
-
+app.post('/api/upload', async (req, res) => {
   upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
         } else if (err) {
             return res.status(500).json(err)
         }
-    return res.status(200).send(req.file)
+    return res.status(200).send(req.file);
   });
+
+  const options = {
+    files: 'input.txt',
+    from: /he/g,
+    to: 'her',
+  };
+
+  try {
+    const results = await replace(options)
+    console.log('Replacement results:', results);
+  }
+  catch (error) {
+    console.error('Error occurred:', error);
+  }
+
 });
 
 if (process.env.NODE_ENV === 'production') {

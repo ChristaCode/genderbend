@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
 import female from './female.png';
 import male from './male.png';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
   state = {
-    response: '',
-    post: '',
-    responseToPost: '',
     selectedFile: null,
     parsing: false
   };
@@ -51,19 +49,16 @@ class App extends Component {
   onClickHandler = async e => {
     e.preventDefault();
     this.setState({ parsing: true });
-    const data = new FormData() 
-    console.log(this.state.selectedFile);
+
+    const data = new FormData()
     data.append('file', this.state.selectedFile)
-    const response = await fetch('/api/world', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ post: this.state.selectedFile }),
+    axios.post('/api/upload', data, {})
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-    const body = await response.text();
-    
-    this.setState({ responseToPost: body });
   }
 
 render() {
