@@ -69,6 +69,8 @@ render() {
         </header>
         <br />
         <div>
+          <div>Only supports .txt files</div>
+          <br />
           <input type="file" name="file" onChange={this.onChangeHandler}/>
           <button type="button" onClick={this.onClickHandler}>Convert</button>
           {this.state.parsing &&

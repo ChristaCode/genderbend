@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 },
 filename: function (req, file, cb) {
   fileName = file.originalname;
-  cb(null, './uploadedFile/' + file.originalname)
+  cb(null, './uploadedFile/' + 'genderbend-'+fileName)
 }
 })
 
