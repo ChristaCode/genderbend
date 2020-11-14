@@ -39,9 +39,7 @@ class App extends Component {
     const data = new FormData()
     data.append('file', this.state.selectedFile)
     axios.post('/api/upload', data, {})
-    .then(function (response) {
-      console.log(response);
-    })
+    .then()
     .catch(function (error) {
       console.log(error);
     })
@@ -49,25 +47,13 @@ class App extends Component {
   }
 
   onDownloadClickHandler = async () => {
-    const element = document.createElement("a");
     const response = await fetch('/api/download');
-    console.log('response', response);
-    console.log('response.data', response.data);
+    const element = document.createElement("a");
     const blob = await response.blob();
-    console.log('blob', blob);
     element.href = URL.createObjectURL(blob);
     element.download = "myFile.txt";
     document.body.appendChild(element);
     element.click();
-    // fileDownload(response, 'test.txt');
-
-    // this.setState({downloadedFile: true});
-
-    // const body = await response.json();
-    // console.log('body', body);
-    // if (response.status !== 200) throw Error(body.message);
-
-    // return body;
   }
 
 render() {
