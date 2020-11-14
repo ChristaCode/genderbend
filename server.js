@@ -1,7 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
-const textract = require('textract');
 const replace = require('replace-in-file');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -9,9 +7,6 @@ var multer = require('multer')
 var cors = require('cors');
 
 app.use(cors());
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -48,6 +43,10 @@ app.post('/api/upload', async (req, res) => {
     console.error('Error occurred:', error);
   }
 
+});
+
+app.get('/api/download', (req, res) => {
+  res.download('./input.txt');
 });
 
 if (process.env.NODE_ENV === 'production') {

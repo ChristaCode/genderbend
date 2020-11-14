@@ -8,7 +8,8 @@ import './App.css';
 class App extends Component {
   state = {
     selectedFile: null,
-    parsing: false
+    parsing: false,
+    downloadedFile: null
   };
   
   handleSubmit = async e => {
@@ -47,8 +48,26 @@ class App extends Component {
     .then(() => this.setState({ parsing: false }))
   }
 
-  onDownloadClickHandler = () => {
-    console.log('download');
+  onDownloadClickHandler = async () => {
+    const element = document.createElement("a");
+    const response = await fetch('/api/download');
+    console.log('response', response);
+    console.log('response.data', response.data);
+    const blob = await response.blob();
+    console.log('blob', blob);
+    element.href = URL.createObjectURL(blob);
+    element.download = "myFile.txt";
+    document.body.appendChild(element);
+    element.click();
+    // fileDownload(response, 'test.txt');
+
+    // this.setState({downloadedFile: true});
+
+    // const body = await response.json();
+    // console.log('body', body);
+    // if (response.status !== 200) throw Error(body.message);
+
+    // return body;
   }
 
 render() {
@@ -75,7 +94,10 @@ render() {
         </div>
         <br />
         {!this.state.parsing && 
-          <button type="button" onClick={this.onDownloadClickHandler}>Download</button>
+          <button type="button" onClick={this.onDownloadClickHandler}>
+            Download
+            {/* <a href={this.state.downloadedFile} download>Download</a> */}
+          </button>
         }
       </div>
     );
