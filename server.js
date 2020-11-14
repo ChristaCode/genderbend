@@ -34,8 +34,8 @@ app.post('/api/upload', async (req, res) => {
   upload(req, res, async () => {
     const options = {
       files: './uploadedFile/*',
-      from: /he/g,
-      to: 'her',
+      from: [/he/g, /him/g, /his/g, /himself/g, /brother/g, /nephew/g, /uncle/g],
+      to: ['her', 'her', 'hers', 'herself', 'sister', 'niece', 'aunt'],
     };
   
     try {

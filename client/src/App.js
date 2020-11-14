@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Loader from 'react-loader-spinner';
-import female from './female.png';
-import male from './male.png';
+import genderIcon from './genderIcon.png';
 import axios from 'axios';
 import './App.css';
 
@@ -61,22 +60,18 @@ render() {
     return (
       <div className="App">
         <header className="App-header">
-        <span>
-        <img src={male} alt="male" style={{width: 30, height: 30}} />
-        <span style={{padding: 5}}>GenderBend</span>
-        <img src={female} alt="female" style={{width: 20, height: 20}} />
-        </span>
+          <img src={genderIcon} alt="symbol" style={{width: 50, height: 50, padding: 5}} />
+          <div style={{color: "pink"}}>GenderBend</div>
         </header>
         <br />
         <div>
-          <div>Only supports .txt files</div>
           <br />
-          <input type="file" name="file" onChange={this.onChangeHandler}/>
+          <input type="file" name="file" onChange={this.onChangeHandler} accept=".txt"/>
           <button type="button" onClick={this.onClickHandler}>Convert</button>
           {this.state.parsing &&
             <Loader
               type="ThreeDots"
-              color="#00BFFF"
+              color="black"
               height={50}
               width={50}
             />}
