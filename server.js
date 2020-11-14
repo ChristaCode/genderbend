@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 var multer = require('multer')
 var cors = require('cors');
+const fs = require('fs');
 
 app.use(cors());
 
@@ -13,40 +14,47 @@ var storage = multer.diskStorage({
   cb(null, '')
 },
 filename: function (req, file, cb) {
-  cb(null, 'input.txt' )
+  fileName = file.originalname;
+  cb(null, './uploadedFile/' + file.originalname)
 }
 })
+
+const cleanup = () => {
+  const files = fs.readdirSync('./uploadedFile');
+  if (files.length > 0) {
+    files.forEach(function(filename) {
+      fs.unlinkSync('./uploadedFile/' + filename);
+    })
+  }
+}
 
 var upload = multer({ storage: storage }).single('file')
 
 app.post('/api/upload', async (req, res) => {
-  upload(req, res, function (err) {
-        if (err instanceof multer.MulterError) {
-            return res.status(500).json(err)
-        } else if (err) {
-            return res.status(500).json(err)
-        }
-    return res.status(200).send(req.file);
-  });
-
-  const options = {
-    files: 'input.txt',
-    from: /he/g,
-    to: 'her',
-  };
-
-  try {
-    const results = await replace(options)
-    console.log('Replacement results:', results);
-  }
-  catch (error) {
-    console.error('Error occurred:', error);
-  }
-
+  upload(req, res, async () => {
+    const options = {
+      files: './uploadedFile/*',
+      from: /he/g,
+      to: 'her',
+    };
+  
+    try {
+      const results = await replace(options)
+      console.log('Replacement results:', results);
+      return res.status(200).send(req.file);
+    }
+    catch (error) {
+      console.error('Error occurred:', error);
+    }
+  })
 });
 
 app.get('/api/download', (req, res) => {
-  res.download('./input.txt');
+  const filename = fs.readdirSync('./uploadedFile');
+  const folderPath = './uploadedFile/' + filename;
+  res.download(folderPath, null, () => {
+    cleanup();
+  });
 });
 
 if (process.env.NODE_ENV === 'production') {

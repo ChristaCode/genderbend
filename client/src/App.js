@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     selectedFile: null,
     parsing: false,
-    downloadedFile: null
+    converted: false
   };
   
   handleSubmit = async e => {
@@ -43,15 +43,16 @@ class App extends Component {
     .catch(function (error) {
       console.log(error);
     })
-    .then(() => this.setState({ parsing: false }))
+    .then(() => this.setState({ parsing: false, converted: true }))
   }
 
   onDownloadClickHandler = async () => {
+    console.log('selectedFile', this.state.selectedFile.name);
     const response = await fetch('/api/download');
     const element = document.createElement("a");
     const blob = await response.blob();
     element.href = URL.createObjectURL(blob);
-    element.download = "myFile.txt";
+    element.download = 'converted-' + this.state.selectedFile.name;
     document.body.appendChild(element);
     element.click();
   }
@@ -74,15 +75,15 @@ render() {
             <Loader
               type="ThreeDots"
               color="#00BFFF"
-              height={100}
-              width={100}
+              height={50}
+              width={50}
             />}
         </div>
         <br />
-        {!this.state.parsing && 
+        <br />
+        {this.state.converted && 
           <button type="button" onClick={this.onDownloadClickHandler}>
             Download
-            {/* <a href={this.state.downloadedFile} download>Download</a> */}
           </button>
         }
       </div>
