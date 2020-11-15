@@ -14,7 +14,7 @@
     "server": "node server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
-  "proxy": "http://localhost:5000/",
+  // "proxy": "http://localhost:5000/",
   "dependencies": {
     "axios": "^0.21.0",
     "body-parser": "^1.18.3",
