@@ -1,6 +1,7 @@
 {
   "name": "genderbend",
   "version": "1.0.0",
+  "homepage": ".",
   "engines": {
     "node": "15.2.0"
   },
