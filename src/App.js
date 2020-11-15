@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Loader from 'react-loader-spinner';
 import genderIcon from './genderIcon.png';
 import axios from 'axios';
 import './App.css';
@@ -61,28 +60,26 @@ render() {
       <div className="App">
         <header className="App-header">
           <img src={genderIcon} alt="symbol" style={{width: 50, height: 50, padding: 5}} />
-          <div style={{color: "pink"}}>GenderBend</div>
+          <div className="headerTitle">GenderBend</div>
         </header>
         <br />
         <div>
           <br />
           <input className="inputStyle" type="file" onChange={this.onChangeHandler} accept=".txt"/>
           <button className="buttonStyle" type="button" onClick={this.onClickHandler}>Convert</button>
-          {this.state.parsing &&
-            <Loader
-              type="ThreeDots"
-              color="black"
-              height={50}
-              width={50}
-            />}
+          <div>
+            {this.state.parsing &&
+              <p class="loading">loading</p>}
+          </div>
         </div>
         <br />
-        <br />
-        {this.state.converted &&
-          <button className="buttonStyle" type="button" onClick={this.onDownloadClickHandler}>
-            Download
-          </button>
-        }
+        <div>
+          {this.state.converted &&
+            <button className="buttonStyle" type="button" onClick={this.onDownloadClickHandler}>
+              Download
+            </button>
+          }
+        </div>
       </div>
     );
   }
