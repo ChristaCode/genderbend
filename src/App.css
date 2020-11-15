@@ -28,6 +28,9 @@ html, body {
   font-size: calc(10px + 2vmin);
   color: rgb(209, 198, 198);
   padding-bottom: 10px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
 }
 
 .App-link {
@@ -56,4 +59,5 @@ html, body {
   display: inline-block;
   font-size: 14px;
   border-radius: 15px;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
