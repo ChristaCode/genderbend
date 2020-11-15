@@ -1,13 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import genderIcon from './genderIcon.png';
 import axios from 'axios';
 import './App.css';
 
 function App() {
-  const [message, setMessage] = useState(null);
-  const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
-
   const [selectedFile, setSelectedFile] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [converted, setConverted] = useState(false);
@@ -32,7 +28,6 @@ function App() {
   }
 
   const onDownloadClickHandler = async () => {
-    console.log('selectedFile', selectedFile.name);
     const response = await fetch('/api/download');
     const element = document.createElement("a");
     const blob = await response.blob();
@@ -41,28 +36,6 @@ function App() {
     document.body.appendChild(element);
     element.click();
   }
-
-  const fetchData = useCallback(() => {
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        setMessage(json.message);
-        setIsFetching(false);
-      }).catch(e => {
-        setMessage(`API call failed: ${e}`);
-        setIsFetching(false);
-      })
-  }, [url]);
-
-  useEffect(() => {
-    setIsFetching(true);
-    fetchData();
-  }, [fetchData]);
 
   return (
     <div className="App">
