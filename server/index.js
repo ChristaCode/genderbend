@@ -55,22 +55,41 @@ if (!isDev && cluster.isMaster) {
 
   app.post('/api/upload', async (req, res) => {
     upload(req, res, async () => {
-      const he = new RegExp('^he', 'i'), him = new RegExp('^him', 'i'), his = new RegExp('^his', 'i'), himself = new RegExp('^himself', 'i');
-      const brother = new RegExp('^brother', 'i'), nephew = new RegExp('^nephew', 'i'), uncle = new RegExp('^uncle', 'i');
-      const options = {
-        files: './uploadedFile/*',
-        from: [he, him, his, himself, brother, nephew, uncle],
-        to: ['her', 'her', 'hers', 'herself', 'sister', 'niece', 'aunt'],
-      };
+
+      function readWriteAsync() {
+        const file = fs.readdirSync('./uploadedFile')[0];
+        fs.readFile('./uploadedFile/' + file, 'utf-8', function(err, data){
+          if (err) throw err;
+
+          const template = '<p>' + data.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
+
+          fs.writeFile('./uploadedFile/' + file.split('.')[0] + '.html', template, 'utf-8', function (err) {
+            if (err) throw err;
+            fs.unlinkSync('./uploadedFile/' + file);
+            return res.status(200).send(req.file);
+          });
+        });
+      }
+ 
+      readWriteAsync();
+
+      // const he = new RegExp('^he', 'i'), him = new RegExp('^him', 'i'), his = new RegExp('^his', 'i'), himself = new RegExp('^himself', 'i');
+      // const brother = new RegExp('^brother', 'i'), nephew = new RegExp('^nephew', 'i'), uncle = new RegExp('^uncle', 'i');
+      // const newline = new RegExp('\n');
+      // const options = {
+      //   files: './uploadedFile/*',
+      //   from: [he, him, his, himself, brother, nephew, uncle, newline],
+      //   to: ['her', 'her', 'hers', 'herself', 'sister', 'niece', 'aunt', '\n<br>\n'],
+      // };
     
-      try {
-        const results = await replace(options)
-        console.log('Replacement results:', results);
-        return res.status(200).send(req.file);
-      }
-      catch (error) {
-        console.error('Error occurred:', error);
-      }
+      // try {
+      //   const results = await replace(options)
+      //   console.log('Replacement results:', results);
+      //   return res.status(200).send(req.file);
+      // }
+      // catch (error) {
+      //   console.error('Error occurred:', error);
+      // }
     })
   });
   
@@ -87,9 +106,6 @@ if (!isDev && cluster.isMaster) {
     res.set('Content-Type', 'application/json');
     res.send('{"message":"Hello from the custom server!"}');
   });
-
-
-
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function(request, response) {

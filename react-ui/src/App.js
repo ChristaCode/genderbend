@@ -32,7 +32,8 @@ function App() {
     const element = document.createElement("a");
     const blob = await response.blob();
     element.href = URL.createObjectURL(blob);
-    element.download = 'converted-' + selectedFile.name;
+    const newName = selectedFile.name.replace('.txt', '.html');
+    element.download = 'converted-' + newName;
     document.body.appendChild(element);
     element.click();
   }
@@ -46,7 +47,7 @@ function App() {
       <br />
       <div>
         <br />
-        <input className="inputStyle" type="file" onChange={onChangeHandler} accept=".txt"/>
+        <input className="inputStyle" type="file" onChange={onChangeHandler} accept=".txt, .html"/>
         <button className="buttonStyle" type="button" onClick={onClickHandler}>Convert</button>
         <div>
           {parsing &&
@@ -63,7 +64,6 @@ function App() {
       </div>
     </div>
   );
-
 }
 
 export default App;
