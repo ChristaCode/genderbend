@@ -55,9 +55,11 @@ if (!isDev && cluster.isMaster) {
 
   app.post('/api/upload', async (req, res) => {
     upload(req, res, async () => {
+      const he = new RegExp('^he', 'i'), him = new RegExp('^him', 'i'), his = new RegExp('^his', 'i'), himself = new RegExp('^himself', 'i');
+      const brother = new RegExp('^brother', 'i'), nephew = new RegExp('^nephew', 'i'), uncle = new RegExp('^uncle', 'i');
       const options = {
         files: './uploadedFile/*',
-        from: [/he/g, /him/g, /his/g, /himself/g, /brother/g, /nephew/g, /uncle/g],
+        from: [he, him, his, himself, brother, nephew, uncle],
         to: ['her', 'her', 'hers', 'herself', 'sister', 'niece', 'aunt'],
       };
     
