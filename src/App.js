@@ -66,8 +66,8 @@ render() {
         <br />
         <div>
           <br />
-          <input type="file" name="file" onChange={this.onChangeHandler} accept=".txt"/>
-          <button type="button" onClick={this.onClickHandler}>Convert</button>
+          <input className="inputStyle" type="file" onChange={this.onChangeHandler} accept=".txt"/>
+          <button className="buttonStyle" type="button" onClick={this.onClickHandler}>Convert</button>
           {this.state.parsing &&
             <Loader
               type="ThreeDots"
@@ -78,8 +78,8 @@ render() {
         </div>
         <br />
         <br />
-        {this.state.converted && 
-          <button type="button" onClick={this.onDownloadClickHandler}>
+        {this.state.converted &&
+          <button className="buttonStyle" type="button" onClick={this.onDownloadClickHandler}>
             Download
           </button>
         }
