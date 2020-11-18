@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.0",
+    "browserify": "^17.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-iframe": "^1.8.0",
     "react-scripts": "^4.0.0"
   },
   "scripts": {

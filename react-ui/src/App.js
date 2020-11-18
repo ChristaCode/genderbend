@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import genderIcon from './genderIcon.png';
 import axios from 'axios';
 import './App.css';
+import Iframe from 'react-iframe'
 
 class App extends Component {
   state = {
@@ -10,16 +11,13 @@ class App extends Component {
     converted: false
   };
 
-  componentWillMount () {
-    const script = document.createElement("script");
-
-    script.src = "https://www.riddle.com/files/js/embed.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-  }
+  // shouldComponentUpdate () {
+  //   if (this.state.converted)
+  //     return false;
+  // }
 
   onChangeHandler=event=>{
+    event.preventDefault();
     this.setState({selectedFile: event.target.files[0]});
   }
 
@@ -50,28 +48,6 @@ class App extends Component {
   }
 
   render() {
-    const divStyle = {
-          margin: "0 auto",
-          maxWidth: "100%",
-          width: "1300px"
-        };
-
-    const iframeStyle = {
-          margin: "0 auto",
-          maxWidth: "100%",
-          width: "100%",
-          height: "500px",
-          border: "2px solid #655469"
-        };
-
-    const riddleID = "120064";
-
-    let newName = '';
-    if(this.state.converted) {
-      newName = this.state.selectedFile.name.replace('.txt', '.html');
-    }
-    const riddleUrl = "../../uploadedFile/" + newName;
-    console.log('riddleUrl', riddleUrl);
                                                           
   return (
     <div className="App">
@@ -97,8 +73,14 @@ class App extends Component {
               Download
             </button>
             <br /><br />
-            <div className="riddle_target" data-rid-id={riddleID} data-fg="#252525" data-bg="#EDEDED" style={divStyle} data-auto-scroll="true">
-              <iframe title="embed-test" style={iframeStyle} src={riddleUrl}></iframe>
+            <div className="iframeStyle">
+              <Iframe url={process.env.PUBLIC_URL + "/genderbend.html"}
+                width="100%"
+                height="650px"
+                id="myId"
+                className="myClassname"
+                display="initial"
+                position="relative"/>
             </div>
           </div>
         }

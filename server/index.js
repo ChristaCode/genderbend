@@ -37,9 +37,9 @@ if (!isDev && cluster.isMaster) {
   },
   filename: function (req, file, cb) {
     fileName = file.originalname;
-    cb(null, './uploadedFile/' + 'genderbend-'+fileName)
+    cb(null, './uploadedFile/' + 'genderbend-'+fileName);
   }
-  })
+  });
 
   var upload = multer({ storage: storage }).single('file');
 
@@ -53,15 +53,23 @@ if (!isDev && cluster.isMaster) {
     }
   }
 
+  const addToPublic = (template) => {
+    fs.writeFile('./react-ui/public/genderbend.html', template, 'utf-8', function (err) {
+      if (err) throw err;          
+    });
+  }
+
   app.post('/api/upload', async (req, res) => {
     upload(req, res, async () => {
 
       function readWriteAsync() {
         const file = fs.readdirSync('./uploadedFile')[0];
-        fs.readFile('./uploadedFile/' + file, 'utf-8', function(err, data){
+        fs.readFile('./uploadedFile/' + file, 'utf-8', async (err, data) => {
           if (err) throw err;
 
           const template = '<p>' + data.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
+
+          await addToPublic(template);
 
           fs.writeFile('./uploadedFile/' + file.split('.')[0] + '.html', template, 'utf-8', function (err) {
             if (err) throw err;
