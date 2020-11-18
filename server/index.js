@@ -145,9 +145,6 @@ if (!isDev && cluster.isMaster) {
           data = data.replaceAll(new RegExp( "(" + 'master' + ")" , 'gi' ), function(match) {
             return matchCase("mistress", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'king' + ")" , 'gi' ), function(match) {
-            return matchCase("queen", match);
-          });
 
           // var regexp = new RegExp("\\b" + 'he' + "\\b", "g");
           data = data.replaceAll(/\bhe\b/g, 'she');
@@ -156,6 +153,7 @@ if (!isDev && cluster.isMaster) {
           data = data.replaceAll(/\bHis\b/g, 'Her');
           data = data.replaceAll(/\bhim\b/g, 'her');
           data = data.replaceAll(/\bHim\b/g, 'Her');
+          data = data.replaceAll(/\bKing\b/g, 'Queen');
 
           const template = '<p>' + data.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
 
