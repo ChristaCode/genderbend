@@ -11,10 +11,27 @@ class App extends Component {
     converted: false
   };
 
-  // shouldComponentUpdate () {
-  //   if (this.state.converted)
-  //     return false;
-  // }
+  componentDidMount(){
+    window.addEventListener('beforeunload', this.componentCleanup);
+    axios.get('/api/unload')
+    .then()
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
+  componentWillUnmount() {
+    this.componentCleanup();
+    window.removeEventListener('beforeunload', this.componentCleanup); // remove the event handler for normal unmounting
+  }
+
+  componentCleanup() {
+    axios.get('/api/unload')
+      .then()
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
 
   onChangeHandler=event=>{
     event.preventDefault();
@@ -48,7 +65,7 @@ class App extends Component {
   }
 
   render() {
-                                                          
+
   return (
     <div className="App">
       <header className="App-header">
@@ -74,7 +91,7 @@ class App extends Component {
             </button>
             <br /><br />
             <div className="iframeStyle">
-              <Iframe url={process.env.PUBLIC_URL + "/genderbend.html"}
+              <Iframe url={"http://localhost:3000/genderbend.html"}
                 width="100%"
                 height="650px"
                 id="myId"

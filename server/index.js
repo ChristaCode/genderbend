@@ -109,6 +109,11 @@ if (!isDev && cluster.isMaster) {
     });
   });
 
+  app.get('/api/unload', (req, res) => {
+    console.log('unload');
+    fs.unlinkSync('./react-ui/public/genderbend.html');
+  });
+
   // Answer API requests.
   app.get('/api', function (req, res) {
     res.set('Content-Type', 'application/json');
