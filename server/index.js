@@ -130,6 +130,12 @@ if (!isDev && cluster.isMaster) {
           data = data.replace(new RegExp( "(" + 'shaft' + ")" , 'gi' ), function(match) {
             return matchCase("slit", match);
           });
+          data = data.replace(new RegExp( "(" + 'balls' + ")" , 'gi' ), function(match) {
+            return matchCase("fold", match);
+          });
+          data = data.replace(new RegExp( "(" + 'semen' + ")" , 'gi' ), function(match) {
+            return matchCase("wetness", match);
+          });
           data = data.replace(new RegExp( "(" + 'sire' + ")" , 'gi' ), function(match) {
             return matchCase("ma'am", match);
           });
