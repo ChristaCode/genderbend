@@ -115,9 +115,6 @@ if (!isDev && cluster.isMaster) {
           data = data.replace(new RegExp( "(" + 'cock\'s' + ")" , 'gi' ), function(match) {
             return matchCase("cunt\'s", match);
           });
-          data = data.replace(new RegExp( "(" + 'member' + ")" , 'gi' ), function(match) {
-            return matchCase("pussy", match);
-          });
           data = data.replace(new RegExp( "(" + 'flaccid' + ")" , 'gi' ), function(match) {
             return matchCase("dry", match);
           });
@@ -148,9 +145,6 @@ if (!isDev && cluster.isMaster) {
           data = data.replace(new RegExp( "(" + 'husband' + ")" , 'gi' ), function(match) {
             return matchCase("wife", match);
           });
-          data = data.replace(new RegExp( "(" + 'lad' + ")" , 'gi' ), function(match) {
-            return matchCase("lassy", match);
-          });
           data = data.replace(new RegExp( "(" + 'chest' + ")" , 'gi' ), function(match) {
             return matchCase("breast", match);
           });
@@ -170,6 +164,8 @@ if (!isDev && cluster.isMaster) {
           data = data.replaceAll(/\bhim\b/g, 'her');
           data = data.replaceAll(/\bHim\b/g, 'Her');
           data = data.replaceAll(/\bKing\b/g, 'Queen');
+          data = data.replaceAll(/\bmember\b/g, 'pussy');
+          data = data.replaceAll(/\blad\b/g, 'lass');
 
           const template = '<p>' + data.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
 
