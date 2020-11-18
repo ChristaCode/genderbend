@@ -82,71 +82,70 @@ if (!isDev && cluster.isMaster) {
         fs.readFile('./uploadedFile/' + file, 'utf-8', async (err, data) => {
           if (err) throw err;
 
-          data = data.replaceAll(new RegExp( "(" + 'handsome' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'handsome' + ")" , 'gi' ), function(match) {
             return matchCase("beautiful", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'uncle' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'uncle' + ")" , 'gi' ), function(match) {
             return matchCase("aunt", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'nephew' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'nephew' + ")" , 'gi' ), function(match) {
             return matchCase("niece", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'grandpa' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'grandpa' + ")" , 'gi' ), function(match) {
             return matchCase("grandma", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'penis' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'penis' + ")" , 'gi' ), function(match) {
             return matchCase("vagina", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'dick' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'dick' + ")" , 'gi' ), function(match) {
             return matchCase("pussy", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'dicks' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'dicks' + ")" , 'gi' ), function(match) {
             return matchCase("pussies", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'dick\'s' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'dick\'s' + ")" , 'gi' ), function(match) {
             return matchCase("pussy\'s", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'cock' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'cock' + ")" , 'gi' ), function(match) {
             return matchCase("cunt", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'cocks' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'cocks' + ")" , 'gi' ), function(match) {
             return matchCase("cunts", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'cock\'s' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'cock\'s' + ")" , 'gi' ), function(match) {
             return matchCase("cunt\'s", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'member' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'member' + ")" , 'gi' ), function(match) {
             return matchCase("pussy", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'girth' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'girth' + ")" , 'gi' ), function(match) {
             return matchCase("hole", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'sire' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'sire' + ")" , 'gi' ), function(match) {
             return matchCase("ma'am", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'mr.' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'mr.' + ")" , 'gi' ), function(match) {
             return matchCase("ms.", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'lord' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'lord' + ")" , 'gi' ), function(match) {
             return matchCase("lady", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'husband' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'husband' + ")" , 'gi' ), function(match) {
             return matchCase("wife", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'lad' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'lad' + ")" , 'gi' ), function(match) {
             return matchCase("lassy", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'chest' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'chest' + ")" , 'gi' ), function(match) {
             return matchCase("breast", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'man' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'man' + ")" , 'gi' ), function(match) {
             return matchCase("woman", match);
           });
-          data = data.replaceAll(new RegExp( "(" + 'master' + ")" , 'gi' ), function(match) {
+          data = data.replace(new RegExp( "(" + 'master' + ")" , 'gi' ), function(match) {
             return matchCase("mistress", match);
           });
 
-          // var regexp = new RegExp("\\b" + 'he' + "\\b", "g");
           data = data.replaceAll(/\bhe\b/g, 'she');
           data = data.replaceAll(/\bHe\b/g, 'She');
           data = data.replaceAll(/\bhis\b/g, 'her');
@@ -180,8 +179,8 @@ if (!isDev && cluster.isMaster) {
   });
 
   app.get('/api/unload', (req, res) => {
-    console.log('unload');
-    fs.unlinkSync('./react-ui/public/genderbend.html');
+    fs.unlinkSync('./react-ui/public/genderbend.html')
+      .error((e) => console.log(e))
   });
 
   // Answer API requests.
