@@ -197,7 +197,6 @@ if (!isDev && cluster.isMaster) {
 
   app.get('/api/unload', (req, res) => {
     fs.unlinkSync('./react-ui/public/genderbend.html')
-      .error((e) => console.log(e))
   });
 
   // Answer API requests.
