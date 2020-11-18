@@ -80,24 +80,6 @@ if (!isDev && cluster.isMaster) {
       }
  
       readWriteAsync();
-
-      // const he = new RegExp('^he', 'i'), him = new RegExp('^him', 'i'), his = new RegExp('^his', 'i'), himself = new RegExp('^himself', 'i');
-      // const brother = new RegExp('^brother', 'i'), nephew = new RegExp('^nephew', 'i'), uncle = new RegExp('^uncle', 'i');
-      // const newline = new RegExp('\n');
-      // const options = {
-      //   files: './uploadedFile/*',
-      //   from: [he, him, his, himself, brother, nephew, uncle, newline],
-      //   to: ['her', 'her', 'hers', 'herself', 'sister', 'niece', 'aunt', '\n<br>\n'],
-      // };
-    
-      // try {
-      //   const results = await replace(options)
-      //   console.log('Replacement results:', results);
-      //   return res.status(200).send(req.file);
-      // }
-      // catch (error) {
-      //   console.error('Error occurred:', error);
-      // }
     })
   });
   

@@ -35,6 +35,11 @@ class App extends Component {
 
   onChangeHandler=event=>{
     event.preventDefault();
+    axios.get('/api/unload')
+      .then()
+      .catch(function (error) {
+        console.log(error);
+      })
     this.setState({selectedFile: event.target.files[0]});
   }
 
