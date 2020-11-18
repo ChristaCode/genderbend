@@ -118,8 +118,17 @@ if (!isDev && cluster.isMaster) {
           data = data.replace(new RegExp( "(" + 'member' + ")" , 'gi' ), function(match) {
             return matchCase("pussy", match);
           });
+          data = data.replace(new RegExp( "(" + 'flaccid' + ")" , 'gi' ), function(match) {
+            return matchCase("dry", match);
+          });
+          data = data.replace(new RegExp( "(" + 'erect' + ")" , 'gi' ), function(match) {
+            return matchCase("wet", match);
+          });
           data = data.replace(new RegExp( "(" + 'girth' + ")" , 'gi' ), function(match) {
             return matchCase("hole", match);
+          });
+          data = data.replace(new RegExp( "(" + 'shaft' + ")" , 'gi' ), function(match) {
+            return matchCase("slit", match);
           });
           data = data.replace(new RegExp( "(" + 'sire' + ")" , 'gi' ), function(match) {
             return matchCase("ma'am", match);
@@ -139,13 +148,15 @@ if (!isDev && cluster.isMaster) {
           data = data.replace(new RegExp( "(" + 'chest' + ")" , 'gi' ), function(match) {
             return matchCase("breast", match);
           });
-          data = data.replace(new RegExp( "(" + 'man' + ")" , 'gi' ), function(match) {
-            return matchCase("woman", match);
-          });
           data = data.replace(new RegExp( "(" + 'master' + ")" , 'gi' ), function(match) {
             return matchCase("mistress", match);
           });
+          data = data.replace(new RegExp( "(" + 'himself' + ")" , 'gi' ), function(match) {
+            return matchCase("herself", match);
+          });
 
+          data = data.replaceAll(/\bman\b/g, 'woman');
+          data = data.replaceAll(/\bMan\b/g, 'Woman');
           data = data.replaceAll(/\bhe\b/g, 'she');
           data = data.replaceAll(/\bHe\b/g, 'She');
           data = data.replaceAll(/\bhis\b/g, 'her');
