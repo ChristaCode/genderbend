@@ -100,8 +100,20 @@ if (!isDev && cluster.isMaster) {
           data = data.replaceAll(new RegExp( "(" + 'dick' + ")" , 'gi' ), function(match) {
             return matchCase("pussy", match);
           });
+          data = data.replaceAll(new RegExp( "(" + 'dicks' + ")" , 'gi' ), function(match) {
+            return matchCase("pussies", match);
+          });
+          data = data.replaceAll(new RegExp( "(" + 'dick\'s' + ")" , 'gi' ), function(match) {
+            return matchCase("pussy\'s", match);
+          });
           data = data.replaceAll(new RegExp( "(" + 'cock' + ")" , 'gi' ), function(match) {
             return matchCase("cunt", match);
+          });
+          data = data.replaceAll(new RegExp( "(" + 'cocks' + ")" , 'gi' ), function(match) {
+            return matchCase("cunts", match);
+          });
+          data = data.replaceAll(new RegExp( "(" + 'cock\'s' + ")" , 'gi' ), function(match) {
+            return matchCase("cunt\'s", match);
           });
           data = data.replaceAll(new RegExp( "(" + 'member' + ")" , 'gi' ), function(match) {
             return matchCase("pussy", match);
