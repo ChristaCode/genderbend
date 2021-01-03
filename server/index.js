@@ -82,79 +82,6 @@ if (!isDev && cluster.isMaster) {
         fs.readFile('./uploadedFile/' + file, 'utf-8', async (err, data) => {
           if (err) throw err;
 
-          data = data.replace(new RegExp( "(" + 'handsome' + ")" , 'gi' ), function(match) {
-            return matchCase("beautiful", match);
-          });
-          data = data.replace(new RegExp( "(" + 'uncle' + ")" , 'gi' ), function(match) {
-            return matchCase("aunt", match);
-          });
-          data = data.replace(new RegExp( "(" + 'nephew' + ")" , 'gi' ), function(match) {
-            return matchCase("niece", match);
-          });
-          data = data.replace(new RegExp( "(" + 'grandpa' + ")" , 'gi' ), function(match) {
-            return matchCase("grandma", match);
-          });
-          data = data.replace(new RegExp( "(" + 'penis' + ")" , 'gi' ), function(match) {
-            return matchCase("vagina", match);
-          });
-          data = data.replace(new RegExp( "(" + 'dick' + ")" , 'gi' ), function(match) {
-            return matchCase("pussy", match);
-          });
-          data = data.replace(new RegExp( "(" + 'dicks' + ")" , 'gi' ), function(match) {
-            return matchCase("pussies", match);
-          });
-          data = data.replace(new RegExp( "(" + 'dick\'s' + ")" , 'gi' ), function(match) {
-            return matchCase("pussy\'s", match);
-          });
-          data = data.replace(new RegExp( "(" + 'cock' + ")" , 'gi' ), function(match) {
-            return matchCase("cunt", match);
-          });
-          data = data.replace(new RegExp( "(" + 'cocks' + ")" , 'gi' ), function(match) {
-            return matchCase("cunts", match);
-          });
-          data = data.replace(new RegExp( "(" + 'cock\'s' + ")" , 'gi' ), function(match) {
-            return matchCase("cunt\'s", match);
-          });
-          data = data.replace(new RegExp( "(" + 'flaccid' + ")" , 'gi' ), function(match) {
-            return matchCase("dry", match);
-          });
-          data = data.replace(new RegExp( "(" + 'erect' + ")" , 'gi' ), function(match) {
-            return matchCase("wet", match);
-          });
-          data = data.replace(new RegExp( "(" + 'girth' + ")" , 'gi' ), function(match) {
-            return matchCase("hole", match);
-          });
-          data = data.replace(new RegExp( "(" + 'shaft' + ")" , 'gi' ), function(match) {
-            return matchCase("slit", match);
-          });
-          data = data.replace(new RegExp( "(" + 'balls' + ")" , 'gi' ), function(match) {
-            return matchCase("fold", match);
-          });
-          data = data.replace(new RegExp( "(" + 'semen' + ")" , 'gi' ), function(match) {
-            return matchCase("wetness", match);
-          });
-          data = data.replace(new RegExp( "(" + 'sire' + ")" , 'gi' ), function(match) {
-            return matchCase("ma'am", match);
-          });
-          data = data.replace(new RegExp( "(" + 'mr.' + ")" , 'gi' ), function(match) {
-            return matchCase("ms.", match);
-          });
-          data = data.replace(new RegExp( "(" + 'lord' + ")" , 'gi' ), function(match) {
-            return matchCase("lady", match);
-          });
-          data = data.replace(new RegExp( "(" + 'husband' + ")" , 'gi' ), function(match) {
-            return matchCase("wife", match);
-          });
-          data = data.replace(new RegExp( "(" + 'chest' + ")" , 'gi' ), function(match) {
-            return matchCase("breast", match);
-          });
-          data = data.replace(new RegExp( "(" + 'master' + ")" , 'gi' ), function(match) {
-            return matchCase("mistress", match);
-          });
-          data = data.replace(new RegExp( "(" + 'himself' + ")" , 'gi' ), function(match) {
-            return matchCase("herself", match);
-          });
-
           data = data.replaceAll(/\bman\b/g, 'woman');
           data = data.replaceAll(/\bMan\b/g, 'Woman');
           data = data.replaceAll(/\bhe\b/g, 'she');
@@ -164,7 +91,6 @@ if (!isDev && cluster.isMaster) {
           data = data.replaceAll(/\bhim\b/g, 'her');
           data = data.replaceAll(/\bHim\b/g, 'Her');
           data = data.replaceAll(/\bKing\b/g, 'Queen');
-          data = data.replaceAll(/\bmember\b/g, 'pussy');
           data = data.replaceAll(/\blad\b/g, 'lass');
 
           const template = '<p>' + data.replace(/\n{2,}/g, "</p><p>").replace(/\n/g, "<br>") + '</p>';
